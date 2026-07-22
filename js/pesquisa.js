@@ -134,3 +134,5 @@ function abrirPagina(nome){
     }
 
 }
+
+console.log("Pesquisa.js carregado!");
