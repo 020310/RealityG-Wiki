@@ -1,126 +1,93 @@
-/*======================================================================
+/*==========================================================
 
 UpWeb
-Desenvolvido por Leandro
 
-=======================================================================
+Pesquisa Principal
 
-ARQUIVO PRINCIPAL
+Responsável apenas pela barra de pesquisa.
 
-Este arquivo controla o funcionamento geral do UpWeb.
-
-REGRAS
-
-1. Nunca colocar sistemas específicos aqui.
-2. Apenas inicializações.
-3. Chamar outros módulos.
-4. Facilitar futuras expansões.
-
-======================================================================*/
+==========================================================*/
 
 
-/*======================================================================
-    OBJETO PRINCIPAL
-======================================================================*/
-
-const UpWeb = {
-
-    version: "1.0",
-
-    name: "UpWeb"
-
-};
-
-
-/*======================================================================
+/*==========================================================
     INICIALIZAÇÃO
-======================================================================*/
+==========================================================*/
 
-document.addEventListener("DOMContentLoaded", iniciarSistema);
+const pesquisa = document.getElementById("search");
 
-
-/*======================================================================
-    INICIAR SISTEMA
-======================================================================*/
-
-function iniciarSistema(){
-
-    console.clear();
-
-    console.log("=======================================");
-    console.log("          UpWeb iniciado");
-    console.log("=======================================");
-
-    mostrarVersao();
-
-    focarPesquisa();
-
-}
+pesquisa.addEventListener("keydown", pesquisar);
 
 
-/*======================================================================
-    MOSTRAR VERSÃO
-======================================================================*/
+/*==========================================================
+    PESQUISA
+==========================================================*/
 
-function mostrarVersao(){
+function pesquisar(event){
 
-    console.log("Sistema:", UpWeb.name);
+    if(event.key !== "Enter") return;
 
-    console.log("Versão:", UpWeb.version);
+    const texto = pesquisa.value
+        .trim()
+        .toLowerCase();
 
-}
+    switch(texto){
 
+        case "item":
+        case "items":
+        case "itens":
 
-/*======================================================================
-    FOCO NA PESQUISA
-======================================================================*/
+            trocarConteudo("<h2>Itens</h2>");
 
-function focarPesquisa(){
+            break;
 
-    const pesquisa = document.getElementById("search");
+        case "perfil":
 
-    if(!pesquisa) return;
+            trocarConteudo("<h2>Perfil</h2>");
 
-    pesquisa.focus();
+            break;
 
-}
+        case "titulo":
+        case "titulos":
+        case "títulos":
+        case "title":
+        case "titles":
 
+            trocarConteudo("<h2>Títulos</h2>");
 
-/*======================================================================
-    TROCAR CONTEÚDO
-======================================================================*/
+            break;
 
-function trocarConteudo(html){
+        default:
 
-    const area = document.getElementById("content");
+            mostrarErro();
 
-    if(!area) return;
-
-    area.innerHTML = html;
+    }
 
 }
 
 
-/*======================================================================
-    LIMPAR CONTEÚDO
-======================================================================*/
+/*==========================================================
+    TELA DE ERRO
+==========================================================*/
 
-function limparConteudo(){
+function mostrarErro(){
 
-    trocarConteudo("");
+    trocarConteudo(`
+
+        <div class="noResult">
+
+            <h1>🔍</h1>
+
+            <h2>Nenhum resultado encontrado</h2>
+
+            <p>
+
+                Verifique a ortografia<br>
+                ou tente outra pesquisa.
+
+            </p>
+
+        </div>
+
+    `);
 
 }
-
-
-/*======================================================================
-    FUTUROS MÓDULOS
-
-    carregarItens()
-
-    carregarPerfil()
-
-    carregarTitulos()
-
-    carregarConfiguracoes()
-
-======================================================================*/
