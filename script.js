@@ -1,73 +1,116 @@
-/*==========================================================
+/*======================================================================
 
 UpWeb
+Desenvolvido por Leandro
 
-Pesquisa Principal
+=======================================================================
 
-Responsável apenas pela barra de pesquisa.
+ARQUIVO PRINCIPAL
 
-==========================================================*/
+Este arquivo controla o funcionamento geral do UpWeb.
+
+REGRAS
+
+1. Nunca colocar sistemas específicos aqui.
+2. Apenas inicializações.
+3. Facilitar futuras expansões.
+4. Todo módulo deve utilizar as funções deste arquivo.
+
+======================================================================*/
 
 
-/*==========================================================
+/*======================================================================
+    CONFIGURAÇÕES
+======================================================================*/
+
+const UpWeb = {
+
+    nome: "UpWeb",
+
+    versao: "1.0.0"
+
+};
+
+
+/*======================================================================
     INICIALIZAÇÃO
-==========================================================*/
+======================================================================*/
 
-const pesquisa = document.getElementById("search");
-
-pesquisa.addEventListener("keydown", pesquisar);
+document.addEventListener("DOMContentLoaded", iniciarSistema);
 
 
-/*==========================================================
+/*======================================================================
+    INICIAR SISTEMA
+======================================================================*/
+
+function iniciarSistema(){
+
+    console.clear();
+
+    console.log("==========================================");
+    console.log("             UpWeb iniciado");
+    console.log("==========================================");
+
+    console.log("Sistema:", UpWeb.nome);
+    console.log("Versão :", UpWeb.versao);
+
+    focarPesquisa();
+
+}
+
+
+/*======================================================================
     PESQUISA
-==========================================================*/
+======================================================================*/
 
-function pesquisar(event){
+function focarPesquisa(){
 
-    if(event.key !== "Enter") return;
+    const campo = document.getElementById("search");
 
-    const texto = pesquisa.value
-        .trim()
-        .toLowerCase();
+    if(campo){
 
-    switch(texto){
-
-        case "item":
-        case "items":
-        case "itens":
-
-            trocarConteudo("<h2>Itens</h2>");
-
-            break;
-
-        case "perfil":
-
-            trocarConteudo("<h2>Perfil</h2>");
-
-            break;
-
-        case "titulo":
-        case "titulos":
-        case "títulos":
-        case "title":
-        case "titles":
-
-            trocarConteudo("<h2>Títulos</h2>");
-
-            break;
-
-        default:
-
-            mostrarErro();
+        campo.focus();
 
     }
 
 }
 
 
-/*==========================================================
-    TELA DE ERRO
-==========================================================*/
+/*======================================================================
+    CONTEÚDO
+======================================================================*/
+
+function trocarConteudo(html){
+
+    const area = document.getElementById("content");
+
+    if(!area){
+
+        console.error("Área #content não encontrada.");
+
+        return;
+
+    }
+
+    area.innerHTML = html;
+
+}
+
+
+/*======================================================================
+    LIMPAR CONTEÚDO
+======================================================================*/
+
+function limparConteudo(){
+
+    trocarConteudo("");
+
+}
+
+
+/*======================================================================
+    MENSAGEM DE ERRO
+======================================================================*/
 
 function mostrarErro(){
 
@@ -80,10 +123,8 @@ function mostrarErro(){
             <h2>Nenhum resultado encontrado</h2>
 
             <p>
-
                 Verifique a ortografia<br>
                 ou tente outra pesquisa.
-
             </p>
 
         </div>
@@ -91,3 +132,13 @@ function mostrarErro(){
     `);
 
 }
+
+
+/*======================================================================
+    FUTUROS MÓDULOS
+
+    carregarItens()
+    carregarPerfil()
+    carregarTitulos()
+
+======================================================================*/
