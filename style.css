@@ -262,6 +262,47 @@ body{
 
 
 /*======================================================================
+    NENHUM RESULTADO
+======================================================================*/
+
+.noResult{
+
+    animation:fade .35s;
+
+}
+
+.noResult h1{
+
+    font-size:60px;
+
+    font-weight:normal;
+
+    margin-bottom:20px;
+
+}
+
+.noResult h2{
+
+    font-size:28px;
+
+    margin-bottom:12px;
+
+    font-weight:500;
+
+}
+
+.noResult p{
+
+    color:#bcbcbc;
+
+    font-size:18px;
+
+    line-height:28px;
+
+}
+
+
+/*======================================================================
     ANIMAÇÕES
 ======================================================================*/
 
@@ -276,6 +317,26 @@ body{
     to{
 
         background-position:400%;
+
+    }
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
 
     }
 
