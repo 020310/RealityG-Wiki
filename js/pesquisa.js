@@ -49,6 +49,7 @@ const paginas = {
 ======================================================================*/
 
 formPesquisa.addEventListener("submit", pesquisar);
+campoPesquisa.addEventListener("input", verificarCampo);
 
 
 /*======================================================================
@@ -136,3 +137,17 @@ function abrirPagina(nome){
 }
 
 console.log("Pesquisa.js carregado!");
+
+/*======================================================================
+    VERIFICAR CAMPO
+======================================================================*/
+
+function verificarCampo(){
+
+    if(campoPesquisa.value.trim() === ""){
+
+        limparConteudo();
+
+    }
+
+}
